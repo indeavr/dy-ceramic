@@ -289,6 +289,30 @@ class CeramicsController {
         }
     }
 
+    async deleteProposition({ contract, id, index }) {
+        try {
+            console.log("Deleting propositon with: ", contract, id, index);
+
+            const arr = (this.propositionsMap?.content?.[contract]?.[id] || []);
+            console.log("Deleting propositon arr after: ", arr);
+            arr.splice(index, 1);
+            console.log("Deleting propositon arr b4: ", arr);
+
+            await this.propositionsMap.update({
+                ...(this.propositionsMap?.content || {}),
+                [contract]: {
+                    ...(this.propositionsMap?.content?.contract || {}),
+                    [id]: arr,
+                }
+            })
+            console.log("Deletion res propositon", this.propositionsMap?.content);
+
+            return this.propositionsMap?.content;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async getPropositions({ contract, id }) {
         try {
             const mapObj = await this.propositionsMap.content;

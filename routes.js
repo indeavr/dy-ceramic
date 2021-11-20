@@ -1,6 +1,14 @@
 const { Router } = require('express')
 const router = Router()
-const { addProposition, getPropositions, getServerDID, getJsonModel, addCollection, getAllCollections } = require("./service")
+const {
+    addProposition,
+    deleteProposition,
+    getPropositions,
+    getServerDID,
+    getJsonModel,
+    addCollection,
+    getAllCollections
+} = require("./service")
 const { generateMetadata } = require("./metadata-generator");
 const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() })
@@ -13,6 +21,7 @@ router.post('/api/collection', addCollection);
 
 router.get('/api/proposition', getPropositions);
 router.post('/api/proposition', addProposition);
+router.delete('/api/proposition', deleteProposition);
 
 router.post('/api/mint', upload.single("asset"), generateMetadata);
 

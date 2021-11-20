@@ -40,6 +40,19 @@ const addProposition = async (req, res, next) => {
     }
 }
 
+const deleteProposition = async (req, res, next) => {
+    const { contract, id, index } = req.query;
+
+    try {
+        ceramic.deleteProposition({ contract, id, index });
+
+        res.send();
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}
+
 const getPropositions = async (req, res, next) => {
     const { contract, id } = req.query;
     console.log("getPropositions", { contract, id });
@@ -76,4 +89,4 @@ const getJsonModel = async function(req, res, next) {
     }
 }
 
-module.exports = { getAllCollections, addCollection, getServerDID, getJsonModel, getPropositions, addProposition };
+module.exports = { getAllCollections, addCollection, getServerDID, getJsonModel, getPropositions, addProposition, deleteProposition };
