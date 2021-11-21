@@ -267,7 +267,7 @@ class CeramicsController {
 
     async addNewProposition({ contract, id, image }) {
         try {
-            const newProposition = { contract, id, image: { original: image } };
+            const newProposition = { contract: contract.trim(), id, image: { original: image } };
 
             console.log("Addinging new propositon with: ", newProposition);
 
@@ -319,7 +319,7 @@ class CeramicsController {
 
             console.log("mapObj", mapObj);
 
-            const prop = mapObj[contract][id]
+            const prop = mapObj[contract.trim()][id]
 
             console.log("prop", prop);
 
