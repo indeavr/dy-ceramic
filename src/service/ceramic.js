@@ -19,7 +19,7 @@ class CeramicsController {
     async init(seed) {
         await this.authenticate(seed);
 
-        const streamInfo = JSON.parse(await readFile(path.resolve(__dirname, './streams.json')));
+        const streamInfo = JSON.parse(await readFile(path.resolve(__dirname, '../../streams.json')));
         console.log(streamInfo);
         if (
             streamInfo.collectionsListStream
@@ -193,7 +193,7 @@ class CeramicsController {
         this.collectionsListStream = await TileDocument.create(this.ceramic, CollectionsListSchema, { pin: true })
         this.propositionsMap = await TileDocument.create(this.ceramic, PropositionMapSchema, { pin: true })
 
-        await writeFile(path.resolve(__dirname, './streams.json'), JSON.stringify({
+        await writeFile(path.resolve(__dirname, '../../streams.json'), JSON.stringify({
             collectionsListStream: this.collectionsListStream.id.toString(),
             propositionsMap: this.propositionsMap.id.toString(),
         }))
