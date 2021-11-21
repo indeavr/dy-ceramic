@@ -10,24 +10,24 @@ const upload = multer({ storage: multer.memoryStorage() })
 
 require('dotenv').config()
 
-const app = express()
+const index = express()
 
 // middlewares
-app.use(cors())
-app.use(express.json()); // Used to parse JSON bodies
-// app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+index.use(cors())
+index.use(express.json()); // Used to parse JSON bodies
+// index.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 
 // for parsing multipart/form-data
 
-app.use(myLogger)
+index.use(myLogger)
 
 // const seed = randomBytes(32)
 // const seed = randomBytes(32)
 
 ceramic.init(JSON.parse(process.env.SEED));
 // routes
-app.use('/', routes);
+index.use('/', routes);
 
-app.listen(process.env.PORT, () => {
+index.listen(process.env.PORT, () => {
     console.log(`DY Server app listening at http://localhost:${process.env.PORT}`)
 })
