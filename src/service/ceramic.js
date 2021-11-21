@@ -5,6 +5,7 @@ const { Ed25519Provider } = require('key-did-provider-ed25519');
 const { TileDocument } = require('@ceramicnetwork/stream-tile');
 const modelAliases = require('../../streams.json');
 const { FACTORY_CONTRACT } = require("../constants");
+const path = require("path");
 const DID = require('dids').DID
 const { writeFile, readFile } = require('fs').promises
 
@@ -18,7 +19,7 @@ class CeramicsController {
     async init(seed) {
         await this.authenticate(seed);
 
-        const streamInfo = JSON.parse(await readFile('./streams.json'));
+        const streamInfo = JSON.parse(await readFile(path.resolve(__dirname, './streams.json')));
         console.log(streamInfo);
         if (
             streamInfo.collectionsListStream
@@ -192,7 +193,7 @@ class CeramicsController {
         this.collectionsListStream = await TileDocument.create(this.ceramic, CollectionsListSchema, { pin: true })
         this.propositionsMap = await TileDocument.create(this.ceramic, PropositionMapSchema, { pin: true })
 
-        await writeFile('./streams.json', JSON.stringify({
+        await writeFile(path.resolve(__dirname, './streams.json'), JSON.stringify({
             collectionsListStream: this.collectionsListStream.id.toString(),
             propositionsMap: this.propositionsMap.id.toString(),
         }))
