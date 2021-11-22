@@ -55,7 +55,7 @@ class CeramicsController {
             })
 
             await did.authenticate();
-            await ceramic.setDID(did);
+            await ceramic.did =did;
 
             console.log('ceramic.did : ', ceramic.did._id);
         } catch (error) {

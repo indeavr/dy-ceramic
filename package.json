@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "start": "node ./src/index.js",
+    "startb": "node ./dist/index.js",
     "build": "webpack",
     "server": "nodemon",
     "debug": "DEBUG=express:* nodemon"
