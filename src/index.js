@@ -29,5 +29,5 @@ ceramic.init(JSON.parse(process.env.SEED));
 index.use('/', routes);
 
 index.listen(process.env.PORT, () => {
-    console.log(`DY Server app listening at http://localhost:${process.env.PORT}`)
+    console.log(`DY Server app listening at :${process.env.PORT}`)
 })

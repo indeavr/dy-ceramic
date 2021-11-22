@@ -1,6 +1,6 @@
-const Ceramic = require('@ceramicnetwork/http-client')
-const KeyDidResolver = require('key-did-resolver');
-const ThreeIdResolver = require('@ceramicnetwork/3id-did-resolver');
+const CeramicClient = require('@ceramicnetwork/http-client').default;
+const KeyDidResolver = require('key-did-resolver').default;
+const ThreeIdResolver = require('@ceramicnetwork/3id-did-resolver').default;
 const { Ed25519Provider } = require('key-did-provider-ed25519');
 const { TileDocument } = require('@ceramicnetwork/stream-tile');
 const modelAliases = require('../../streams.json');
@@ -42,8 +42,8 @@ class CeramicsController {
     async authenticate(seed) {
         try {
             console.log("API url", process.env.CERAMIC_API_URL);
-            
-            const ceramic = this.ceramic = new Ceramic(process.env.CERAMIC_API_URL);
+
+            const ceramic = this.ceramic = new CeramicClient(process.env.CERAMIC_API_URL);
 
             const did = new DID({
                 provider: new Ed25519Provider(seed),
