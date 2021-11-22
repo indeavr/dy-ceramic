@@ -41,9 +41,10 @@ class CeramicsController {
 
     async authenticate(seed) {
         try {
-            console.log("API url", process.env.CERAMIC_API_URL);
+            const apiUrl = process.env.CERAMIC_API_URL;
+            console.log("API url", apiUrl);
 
-            const ceramic = this.ceramic = new CeramicClient(process.env.CERAMIC_API_URL);
+            const ceramic = this.ceramic = new CeramicClient(apiUrl);
 
             const did = new DID({
                 provider: new Ed25519Provider(seed),
